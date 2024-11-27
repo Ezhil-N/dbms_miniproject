@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Menu Items</h2>
+    <ul>
+        {% for item in menu_items %}
+            <li>
+                <div>
+                    <!-- Display food item image -->
+                    <img src="{{ url_for('static', filename=item.image_url) }}" alt="{{ item.name }}" style="width:150px; height:150px; margin-right:10px;">
+                    
+                    <!-- Display food item name and price -->
+                    <strong>{{ item.name }}</strong> - ${{ item.price }}<br>
+                    <span>{{ item.description }}</span>
+
+                    <!-- Delete button form -->
+                    <form action="{{ url_for('delete_menu_item', item_id=item.id) }}" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
